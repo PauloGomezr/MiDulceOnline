@@ -27,7 +27,7 @@ const productoSchema = mongoose.Schema({
   },
   fechaCreacion:{
     type:Date,
-    required:false
+    required:true
   }
 },{versionKey:false});
 
