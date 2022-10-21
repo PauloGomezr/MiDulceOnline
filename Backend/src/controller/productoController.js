@@ -3,7 +3,7 @@ const { now } = require("mongoose");
 const Producto = require("../models/productoModel");
 
 //Mostrar todos los productos
-exports.mostrarProducto = async (req, res) => {
+exports.mostrarProductos = async (req, res) => {
     try {
         const productos = await Producto.find();
         res.json(productos);
@@ -13,6 +13,7 @@ exports.mostrarProducto = async (req, res) => {
     }
 }
 
+//Crear un nuevo producto 
 exports.crearProducto = async (req, res) => {
     try {
         let producto;
@@ -28,6 +29,7 @@ exports.crearProducto = async (req, res) => {
     }
 }
 
+//Buscar producto por id
 exports.buscarProducto = async (req, res) => {
     try {
         let producto = await Producto.findById(req.params.id);
@@ -43,6 +45,7 @@ exports.buscarProducto = async (req, res) => {
     }
 }
 
+//Eliminar producto por id
 exports.eliminarProducto = async (req, res)=>{
     try {
         let producto = await Producto.findById(req.params.id);
@@ -58,6 +61,7 @@ exports.eliminarProducto = async (req, res)=>{
     }
 }
 
+//Modificar la información de un producto
 exports.actualizarProducto = async (req, res)=>{
     try {
        const {nombre_prod,precio_comp,presentacion,categoria,precio_venta,cantidad} =req.body; 

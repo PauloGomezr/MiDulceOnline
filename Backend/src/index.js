@@ -12,8 +12,10 @@ conectarBD();
 app.use(cors());
 app.use(express.json());
 
-//prefijo
+//prefijo productos
 app.use('/api/productos',require('../src/routes/route_producto'));
+//prefijo usuarios
+app.use('/api/usuarios',require('../src/routes/route_usuario'));
 
 //routes
 app.get('/',(req,res)=>{
