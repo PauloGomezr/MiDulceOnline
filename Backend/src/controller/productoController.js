@@ -64,18 +64,18 @@ exports.eliminarProducto = async (req, res)=>{
 //Modificar la información de un producto
 exports.actualizarProducto = async (req, res)=>{
     try {
-       const {nombre_prod,precio_comp,presentacion,categoria,precio_venta,cantidad} =req.body; 
+       const {nombreProd,precioComp,presentacion,categoria,precioVenta,cantidad} =req.body; 
        let producto = await Producto.findById(req.params.id);
 
        if(!producto){
         res.status(404).json({msg: 'No existe el producto para actualizar'});
        }
        //se asignan los nuevos datos
-       producto.nombre_prod = nombre_prod;
-       producto.precio_comp = precio_comp;
+       producto.nombreProd = nombreProd;
+       producto.precioComp = precioComp;
        producto.presentacion = presentacion;
        producto.categoria = categoria;
-       producto.precio_venta = precio_venta;
+       producto.precioVenta = precioVenta;
        producto.cantidad = cantidad;
        producto.fechaActualizacion = new Date();
 
