@@ -27,7 +27,13 @@ const productoSchema = mongoose.Schema({
   },
   fechaCreacion:{
     type:Date,
-    required:true
+    required:true,
+    default: Date.now()
+  },
+  fechaActualizacion:{
+    type:Date,
+    required:true,
+    default: Date.now()
   }
 },{versionKey:false});
 

@@ -18,12 +18,19 @@ const usuarioSchema = mongoose.Schema({
         require:true 
     },
     estado:{
-        type:String,
-        require:true 
+        type:Boolean,
+        require:true,
+        default: true
     },
     fechaCreacion:{
         type:Date,
-        required:true
+        required:true,
+        default: Date.now()
+    },
+    fechaActualizacion:{
+        type:Date,
+        //required:true
+        //default: Date.now()
     }
 },{versionKey:false});
 

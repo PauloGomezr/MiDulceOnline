@@ -8,8 +8,8 @@ exports.mostrarProductos = async (req, res) => {
         const productos = await Producto.find();
         res.json(productos);
     } catch (error) {
-        console.log(error)
-        res.status(500).send("Hubo un error al cargar los productos")
+        console.log(error);
+        res.status(500).send("Hubo un error al cargar los productos");
     }
 }
 
@@ -25,7 +25,7 @@ exports.crearProducto = async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        res.status(500).send("Hubo un error al ejecutar la peticion de creacion")
+        res.status(500).send("Hubo un error al crear un nuevo producto")
     }
 }
 
@@ -70,13 +70,14 @@ exports.actualizarProducto = async (req, res)=>{
        if(!producto){
         res.status(404).json({msg: 'No existe el producto para actualizar'});
        }
+       //se asignan los nuevos datos
        producto.nombre_prod = nombre_prod;
        producto.precio_comp = precio_comp;
        producto.presentacion = presentacion;
        producto.categoria = categoria;
        producto.precio_venta = precio_venta;
        producto.cantidad = cantidad;
-       producto.fechaCreacion = now();
+       producto.fechaActualizacion = new Date();
 
        producto = await Producto.findOneAndUpdate({_id:req.params.id},producto,{new:true});
        res.json(producto);

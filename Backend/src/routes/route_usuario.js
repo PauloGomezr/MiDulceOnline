@@ -1,14 +1,14 @@
 //rutas para usuario
-const express = require('express');
+const express = require("express");
 const router = express.Router();
 const usuarioController = require('../controller/usuarioController');
 
 
 //Metodos CRUD
-router.post('/',usuarioController.crearUsuario);
 router.get('/',usuarioController.mostrarUsuarios);
+router.post('/',usuarioController.crearUsuario);
 router.get('/:id',usuarioController.buscarUsuario);
-router.delete('/:id',usuarioController.eliminarUsuario);
+router.patch('/:id',usuarioController.inactivarUsuario); //cambiar un atributo
 router.put('/:id',usuarioController.actualizarUsuario);
 
 
