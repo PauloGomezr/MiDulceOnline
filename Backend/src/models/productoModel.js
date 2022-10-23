@@ -26,6 +26,11 @@ const productoSchema = mongoose.Schema(
       type: Number,
       required: true
     },
+    estado: {
+      type: Boolean,
+      require: true,
+      default: true
+    },
     fechaCreacion: {
       type: Date,
       required: true,

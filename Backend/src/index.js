@@ -14,6 +14,8 @@ app.use(express.json());
 app.use("/api/productos", require("../src/routes/route_producto"));
 //prefijo usuarios
 app.use("/api/usuarios", require("../src/routes/route_usuario"));
+//prefijo ordenes
+app.use("/api/ordenes", require("../src/routes/route_ordenes"));
 
 //routes
 app.get("/", (req, res) => {

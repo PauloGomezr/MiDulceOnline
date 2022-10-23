@@ -2,18 +2,7 @@ const { response, json } = require("express");
 const { now } = require("mongoose");
 const Producto = require("../models/productoModel");
 
-//Mostrar todos los productos
-exports.mostrarProductos = async (req, res) => {
-  try {
-    const productos = await Producto.find();
-    res.json(productos);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Hubo un error al cargar los productos");
-  }
-};
-
-//Crear un nuevo producto
+//Creación un nuevo producto
 exports.crearProducto = async (req, res) => {
   try {
     let producto;
@@ -43,19 +32,14 @@ exports.buscarProducto = async (req, res) => {
   }
 };
 
-//Eliminar producto por id
-exports.eliminarProducto = async (req, res) => {
+//Mostrar todos los productos
+exports.mostrarProductos = async (req, res) => {
   try {
-    let producto = await Producto.findById(req.params.id);
-    if (!producto) {
-      res.status(404).json({ msg: "El producto no existe" });
-    }
-
-    await Producto.findOneAndRemove({ _id: req.params.id });
-    res.json({ msg: "Se elimino el producto satisfactoriamente" });
+    const productos = await Producto.find();
+    res.json(productos);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error al eliminar el producto");
+    res.status(500).send("Hubo un error al cargar los productos");
   }
 };
 
@@ -93,5 +77,45 @@ exports.actualizarProducto = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send("Hubo un error al actualizar el producto");
+  }
+};
+
+//Eliminar producto por id
+exports.eliminarProducto = async (req, res) => {
+  try {
+    let producto = await Producto.findById(req.params.id);
+    if (!producto) {
+      res.status(404).json({ msg: "El producto no existe" });
+    }
+
+    await Producto.findOneAndRemove({ _id: req.params.id });
+    res.json({ msg: "Se elimino el producto satisfactoriamente" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error al eliminar el producto");
+  }
+};
+
+//Inactivar usuario
+exports.inactivarProducto = async (req, res) => {
+  try {
+    let producto = await Producto.findById(req.params.id);
+    if (!producto) {
+      res.status(404).json({ msg: "El producto no existe" });
+    }
+    console.log(producto.estado);
+    producto.estado = false;
+    producto.fechaActualizacion = new Date();
+    producto = await Producto.findOneAndUpdate(
+      { _id: req.params.id },
+      producto,
+      {
+        new: true
+      }
+    );
+    res.json(producto);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error al inactivar el producto");
   }
 };

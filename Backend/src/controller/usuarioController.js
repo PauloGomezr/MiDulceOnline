@@ -2,17 +2,6 @@ const { response, json } = require("express");
 const { now } = require("mongoose");
 const Usuario = require("../models/usuarioModel");
 
-//Mostrar todos lo usuarios
-exports.mostrarUsuarios = async (req, res) => {
-  try {
-    const usuarios = await Usuario.find();
-    res.json(usuarios);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send("Hubo un error al cargar los usuarios");
-  }
-};
-
 //Crear un nuevo usuario
 exports.crearUsuario = async (req, res) => {
   try {
@@ -43,24 +32,14 @@ exports.buscarUsuario = async (req, res) => {
   }
 };
 
-//Inactivar usuario
-exports.inactivarUsuario = async (req, res) => {
+//Mostrar todos lo usuarios
+exports.mostrarUsuarios = async (req, res) => {
   try {
-    let usuario = await Usuario.findById(req.params.id);
-    if (!usuario) {
-      res.status(404).json({ msg: "El usuario no existe" });
-    }
-    console.log(usuario.estado);
-    usuario.estado = false;
-    console.log(usuario.estado);
-    usuario.fechaActualizacion = new Date();
-    usuario = await Usuario.findOneAndUpdate({ _id: req.params.id }, usuario, {
-      new: true
-    });
-    res.json(usuario);
+    const usuarios = await Usuario.find();
+    res.json(usuarios);
   } catch (error) {
     console.log(error);
-    res.status(500).send("Hubo un error al inactivar el usuario");
+    res.status(500).send("Hubo un error al cargar los usuarios");
   }
 };
 
@@ -88,5 +67,25 @@ exports.actualizarUsuario = async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).send("Hubo un error al actualizar el usuario");
+  }
+};
+
+//Inactivar usuario
+exports.inactivarUsuario = async (req, res) => {
+  try {
+    let usuario = await Usuario.findById(req.params.id);
+    if (!usuario) {
+      res.status(404).json({ msg: "El usuario no existe" });
+    }
+    console.log(usuario.estado);
+    usuario.estado = false;
+    usuario.fechaActualizacion = new Date();
+    usuario = await Usuario.findOneAndUpdate({ _id: req.params.id }, usuario, {
+      new: true
+    });
+    res.json(usuario);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Hubo un error al inactivar el usuario");
   }
 };

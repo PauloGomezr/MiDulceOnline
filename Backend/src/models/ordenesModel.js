@@ -1,19 +1,24 @@
 const mongoose = require("mongoose");
+var Schema = mongoose.Schema;
+const Usuario = mongoose.model("Usuario");
+const Producto = mongoose.model("Producto");
 
-const ordenesSchema = mongoose.Schema(
+const ordenesSchema = new Schema(
   {
-    cliente: {
-      type: mongoose.Schema.Types.ObjectId,
+    usuario: {
+      type: Schema.ObjectId,
       required: true,
-      ref: "Usuario"
+      ref: Usuario
     },
-    tipoOrden: {
+    tipoTransaccion: {
       type: String,
-      required: true
+      required: true,
+      trim: true
     },
     estado: {
-      type: String,
-      required: true
+      type: Boolean,
+      require: true,
+      default: true
     },
     fechaRegistro: {
       type: Date,
@@ -23,13 +28,13 @@ const ordenesSchema = mongoose.Schema(
     articulos: [
       {
         producto: {
-          type: mongoose.Schema.Types.ObjectId,
-          required: true,
-          ref: "Producto"
+          type: Schema.ObjectId,
+          ref: Producto
         },
         cantidad: {
-          type: String,
-          required: true
+          type: Number,
+          required: true,
+          trim: true
         },
         subtotal: {
           type: Number,
@@ -47,4 +52,4 @@ const ordenesSchema = mongoose.Schema(
   { versionKey: false }
 );
 
-module.exports = mongoose.model("Ordenes", productoSchema);
+module.exports = mongoose.model("Ordenes", ordenesSchema);

@@ -4,23 +4,27 @@ const usuarioSchema = mongoose.Schema(
   {
     nombre: {
       type: String,
-      require: true
+      required: true,
+      trim: true
     },
     apellido: {
       type: String,
-      require: true
+      required: true,
+      trim: true
     },
     correo: {
       type: String,
-      require: true
+      required: true,
+      trim: true
     },
     clave: {
       type: String,
-      require: true
+      required: true,
+      trim: true
     },
     estado: {
       type: Boolean,
-      require: true,
+      required: true,
       default: true
     },
     fechaCreacion: {
