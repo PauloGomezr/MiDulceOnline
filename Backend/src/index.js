@@ -3,7 +3,7 @@ const conectarBD = require("./config/bd");
 const cors = require("cors");
 
 const app = express();
-const port = 7000;
+const port = 4000;
 
 //conectamos la bd
 conectarBD();

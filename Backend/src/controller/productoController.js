@@ -96,7 +96,7 @@ exports.eliminarProducto = async (req, res) => {
   }
 };
 
-//Inactivar usuario
+//Inactivar producto
 exports.inactivarProducto = async (req, res) => {
   try {
     let producto = await Producto.findById(req.params.id);
