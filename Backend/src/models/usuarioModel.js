@@ -17,10 +17,19 @@ const usuarioSchema = mongoose.Schema(
       required: true,
       trim: true
     },
-    clave: {
+    /*clave: {
       type: String,
       required: true,
       trim: true
+    },*/
+    password: {
+      type: String,
+      require: true,
+      trim: true
+    },
+    registro: {
+      type: Date,
+      default: Date.now() 
     },
     estado: {
       type: Boolean,
@@ -36,7 +45,7 @@ const usuarioSchema = mongoose.Schema(
       type: Date
       //required:true
       //default: Date.now()
-    }
+    },
   },
   { versionKey: false }
 );
